@@ -1,0 +1,6 @@
+name: Test-Mod
+version: '${project.version}'
+main: me.testmod.testmod.TestMod
+api-version: 1.19
+libraries:
+  - org.jetbrains.kotlin:kotlin-stdlib:1.7.10

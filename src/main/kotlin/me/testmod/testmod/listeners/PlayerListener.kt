@@ -10,8 +10,9 @@ import org.bukkit.event.player.PlayerShearEntityEvent
 object PlayerListener : Listener {
     @EventHandler
     fun onPlayerShear(event: PlayerShearEntityEvent) {
-        if (event.entity !is Sheep) return
-        (event.entity as Sheep).color = DyeColor.LIGHT_BLUE
+        when (val entity = event.entity) {
+            is Sheep -> entity.color = DyeColor.LIGHT_BLUE
+        }
     }
 
     @EventHandler

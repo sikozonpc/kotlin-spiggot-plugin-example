@@ -1,5 +1,6 @@
 package me.testmod.testmod.commands
 
+import me.testmod.testmod.api.player.PlayerController
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.Material
@@ -34,7 +35,6 @@ object MenuCommand : PluginCommandExecutor {
         menuInventory.setItem(0, spawnSheepItem)
 
         sender.openInventory(menuInventory)
-
         sender.playSound(sender, Sound.ITEM_BOOK_PAGE_TURN, 3.0f, 1.0f)
         return true
     }
@@ -43,8 +43,11 @@ object MenuCommand : PluginCommandExecutor {
         val currentItem = event.currentItem
         if (currentItem === null) return
 
+        val player = event.whoClicked
+        if (player !is Player) return
+
         when (currentItem.type) {
-            Material.SHEEP_SPAWN_EGG -> HomeCommand.playerTeleportHome(event.whoClicked as Player)
+            Material.SHEEP_SPAWN_EGG -> PlayerController.teleportHome(player)
             else -> return
         }
 

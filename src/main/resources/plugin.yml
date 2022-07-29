@@ -17,3 +17,6 @@ commands:
   setHome:
     description: "Sets a new home in the current world "
     usage: /<command>
+  menu:
+    description: "Opens a menu of commands"
+    usage: /<command>

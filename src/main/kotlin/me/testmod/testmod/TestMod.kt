@@ -2,6 +2,7 @@ package me.testmod.testmod
 
 import me.testmod.testmod.commands.*
 import me.testmod.testmod.listeners.*
+import org.bukkit.Difficulty
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -27,9 +28,15 @@ class TestMod : JavaPlugin() {
         logger.info("Plugin Events successfully registered")
     }
 
+    private fun setServerSettings() {
+        server.worlds.map { it.difficulty = Difficulty.PEACEFUL }
+    }
+
     override fun onEnable() {
         config.options().copyDefaults()
         saveConfig()
+
+        setServerSettings()
 
         registerEvents(arrayOf(
             PlayerListener,
@@ -40,6 +47,7 @@ class TestMod : JavaPlugin() {
             PlayerFeedCommand,
             HomeCommand,
             SetHomeCommand,
+            MenuCommand,
         ))
 
         instance = this

@@ -1,5 +1,6 @@
 package me.testmod.testmod.listeners
 
+import org.bukkit.ChatColor
 import org.bukkit.DyeColor
 import org.bukkit.entity.Sheep
 import org.bukkit.event.EventHandler
@@ -18,6 +19,6 @@ object PlayerListener : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
-        event.joinMessage = "Welcome back ${player.name} !"
+        event.joinMessage = "Welcome back sir!"
     }
 }

@@ -40,7 +40,8 @@ class TestMod : JavaPlugin() {
 
         registerEvents(arrayOf(
             PlayerListener,
-            TeleportBowListener
+            TeleportBowListener,
+            MenuInventoryListener,
         ))
         registerCommands(arrayOf(
             PlayerExplodeCommand,

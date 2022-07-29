@@ -8,12 +8,14 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
-import org.bukkit.inventory.meta.ItemMeta
 
 
 object MenuCommand : PluginCommandExecutor {
     override val commandName = "menu"
+
+    val MenuInventoryId = "${ChatColor.BLUE} Potato Menu"
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender !is Player) return false
@@ -28,7 +30,7 @@ object MenuCommand : PluginCommandExecutor {
         }
         spawnSheepItem.itemMeta = spawnSheepItemMeta
 
-        val menuInventory = Bukkit.createInventory(sender, 9, "${ChatColor.BLUE} Potato Menu")
+        val menuInventory = Bukkit.createInventory(sender, 9, MenuInventoryId)
         menuInventory.setItem(0, spawnSheepItem)
 
         sender.openInventory(menuInventory)
@@ -37,4 +39,16 @@ object MenuCommand : PluginCommandExecutor {
         return true
     }
 
+    fun onMenuItemClick(event: InventoryClickEvent) {
+        val currentItem = event.currentItem
+        if (currentItem === null) return
+
+        when (currentItem.type) {
+            Material.SHEEP_SPAWN_EGG -> HomeCommand.playerTeleportHome(event.whoClicked as Player)
+            else -> return
+        }
+
+        // avoid moving of items
+        event.isCancelled = true
+    }
 }

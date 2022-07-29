@@ -1,8 +1,6 @@
 package me.testmod.testmod.commands
 
-import me.testmod.testmod.TestMod
 import me.testmod.testmod.api.player.PlayerController
-import org.bukkit.Location
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

@@ -4,3 +4,16 @@ main: me.testmod.testmod.TestMod
 api-version: 1.19
 libraries:
   - org.jetbrains.kotlin:kotlin-stdlib:1.7.10
+commands:
+  explode:
+    description: "Creates a fake explosion sound"
+    usage: /<command>
+  feed:
+    description: "Feeds the player to the max"
+    usage: /<command>
+  home:
+    description: "Teleport the player to the home location"
+    usage: /<command>
+  setHome:
+    description: "Sets a new home in the current world "
+    usage: /<command>

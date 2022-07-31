@@ -1,18 +1,14 @@
 package me.testmod.testmod.listeners
 
 import me.testmod.testmod.api.gui.MenuBookGUI
+import me.testmod.testmod.api.items.MenuBook
 import me.testmod.testmod.commands.MenuCommand
-import org.bukkit.Bukkit
-import org.bukkit.ChatColor
-import org.bukkit.Material
-import org.bukkit.Sound
-import org.bukkit.enchantments.Enchantment
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
+import org.bukkit.event.block.Action.RIGHT_CLICK_AIR
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.ItemStack
 
 object MenuInventoryListener : Listener {
     /**
@@ -29,13 +25,19 @@ object MenuInventoryListener : Listener {
 
     @EventHandler
     fun onPlayerItemInteract(event: PlayerInteractEvent) {
+        val hasRightClicked = arrayOf(RIGHT_CLICK_AIR, Action.RIGHT_CLICK_BLOCK).contains(event.action)
+        when {
+            hasRightClicked -> handleRightClickBook(event)
+        }
+    }
+
+    private fun handleRightClickBook(event: PlayerInteractEvent) {
         val item = event.item
         if (item === null) return
 
-        val hasClickedOnMenuBook = item.itemMeta?.displayName.equals(MenuCommand.MenuBookID)
+        val hasClickedOnMenuBook = item.itemMeta?.displayName.equals(MenuBook.displayName)
         when {
             hasClickedOnMenuBook -> MenuBookGUI(event.player).open()
         }
     }
-
 }
